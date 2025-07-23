@@ -6,7 +6,9 @@ from flask import request
 from flask import url_for
 from flask_httpauth import HTTPBasicAuth
 from flask import g, session, redirect, url_for
-# from flask_simpleldap import LDAP
+
+from flask_simpleldap import LDAP
+
 import json
 import os
 
@@ -29,7 +31,9 @@ try:
     student_age_file_path
     student_age_file_path  = os.environ['student_age_file_path'] 
 except NameError:
-    student_age_file_path  = './student_age.json'
+
+    student_age_file_path  = '/data/student_age.json'
+
 
 student_age_file = open(student_age_file_path, "r")
 student_age = json.load(student_age_file)
@@ -55,4 +59,7 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 if __name__ == '__main__':
+
     app.run(debug=True, host='localhost', port=5000, threaded=True)
+
+
