@@ -21,10 +21,18 @@ pipeline {
                 // Add your test commands here
             }
         }
+        stage('Test d'integration){
+            steps {
+                sh 'mvn verify'
+                echo 'Running integration tests...'
+                // Add your integration test commands here
+            }
+        }
         stage('Deploy') {
             steps {
-                sh 'mvn deploy'
-                echo 'Deploying...'
+                sh 'docker build -t my-app .'
+                sh' docker run -d student_age.py'
+                echo '---------------- Deploying...'
                 // Add your deployment commands here
             }
         }
